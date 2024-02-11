@@ -1,9 +1,10 @@
-import './App.css';
+import "./App.css";
+import Header from "./Header";
 
 function App() {
   return (
-    <div className="App">
-     <h1>amazon clone</h1>
+    <div className="app">
+      <Header />
     </div>
   );
 }

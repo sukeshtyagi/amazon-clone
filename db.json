@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "585d",
+      "email": "shreeg@namoShree.org",
+      "password": "1601"
+    },
+    {
+      "id": "7bb1",
+      "email": "namog@namoShree.org",
+      "password": "3011"
+    },
+    {
+      "id": "33f6",
+      "email": "nehag@namoShree.org",
+      "password": "0904"
+    }
+  ]
+}

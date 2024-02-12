@@ -12,16 +12,46 @@ function Home() {
           className="home__image"
         />
         <div className="home__row">
-          <Product />
-          <Product />
+          <Product
+            title="The Lean Startup"
+            image="https://rukminim2.flixcart.com/image/416/416/koudfgw0/regionalbooks/r/x/m/the-lean-startup-original-imag37egg7hyqpmx.jpeg?q=70&crop=false"
+            price={16.01}
+            rating={4}
+          />
+          <Product
+            title="The Intelligent Investor"
+            image="https://m.media-amazon.com/images/I/91+t0Di07FL._SY425_.jpg"
+            price={30.11}
+            rating={5}
+          />
         </div>
         <div className="home__row">
-          <Product />
-          <Product />
-          <Product />
+          <Product
+            title="Veer Savarkar"
+            image="https://m.media-amazon.com/images/I/41ZnGXIV1QL._SY445_SX342_.jpg"
+            price={16.01}
+            rating={5}
+          />
+          <Product
+            title="India that is Bharat"
+            image="https://m.media-amazon.com/images/I/51zUHE2fTOL._SY445_SX342_.jpg"
+            price={1995}
+            rating={5}
+          />
+          <Product
+            title="7 Mindset For Success,Happiness and Fulfilment"
+            image="https://m.media-amazon.com/images/I/41QI2g0S+7L._SY445_SX342_.jpg"
+            price={30.11}
+            rating={5}
+          />
         </div>
         <div className="home__row">
-          <Product />
+          <Product
+            title="The Science of Mind Management"
+            image="https://m.media-amazon.com/images/I/41rY50pAxKL._SY445_SX342_.jpg"
+            price={30.11}
+            rating={5}
+          />
         </div>
       </div>
     </div>

@@ -52,14 +52,17 @@
   font-weight: 900;
 }
 .header__shoppingBasket {
-  color: white;
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
 }
+.header__shoppingBasketIcon {
+  color: white;
+}
 .header__basketCount {
   font-size: 20px;
   margin: 0 10px;
+  color: white;
 }

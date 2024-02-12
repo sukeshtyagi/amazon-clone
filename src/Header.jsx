@@ -17,20 +17,23 @@ function Header() {
           className="header__logo"
         />
       </NavLink>
-
       <div className="header__search">
         <input type="text" className="header__searchInput" />
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <div className="header__option">
-          <span className="header__optionLineOne">Hello Guest</span>
-          <span className="header__optionLineTwo">Sign IN</span>
-        </div>
+        <NavLink to="/login">
+          <div className="header__option">
+            <span className="header__optionLineOne">Hello Guest</span>
+            <span className="header__optionLineTwo">Sign IN</span>
+          </div>
+        </NavLink>
+
         <div className="header__option">
           <span className="header__optionLineOne">Returns</span>
           <span className="header__optionLineTwo">& Orders</span>
         </div>
+
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
           <span className="header__optionLineTwo">Prime</span>

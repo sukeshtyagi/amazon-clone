@@ -5,6 +5,12 @@ import Home from "./Home";
 import Checkout from "./Checkout";
 import Login from "./Login";
 import Payment from "./Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const promise = loadStripe(
+  "pk_test_51OjCk5SJjrgblpJJEFx58wwFoukkwGC4sKB2zCCCDZHF7WwIgzE5QkTVKSVbkNEycQYkuISERAA7qVnCpCAuNy7W00YnjbYLm4"
+);
 
 function App() {
   return (
@@ -35,7 +41,9 @@ function App() {
             element={
               <>
                 <Header />
-                <Payment />
+                <Elements stripe={promise}>
+                  <Payment />
+                </Elements>
               </>
             }
           />

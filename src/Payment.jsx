@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
+import axios from "axios";
 
 function Payment() {
   const navigate = useNavigate();
@@ -22,10 +23,17 @@ function Payment() {
 
   useEffect(() => {
     const getClientSecret = async () => {
-      //const response = await axios;/*need to workd on this and backkend*/
+      const response = await axios({
+        method: "POST",
+        url: `/payment/create?total=${getBasketTotal(basket) * 100}`,
+      });
+      setClientSecret(response.data.clientSecret);
     };
+
     getClientSecret();
   }, [basket]);
+
+  console.log("the secret is", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +48,9 @@ function Payment() {
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
         navigate("/orders");
       });
   };
@@ -101,7 +112,7 @@ function Payment() {
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
-              {error && <div>error</div>}
+              {error && <div>Enter Correct Details</div>}
             </form>
           </div>
         </div>

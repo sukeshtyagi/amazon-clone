@@ -4,9 +4,9 @@ import Header from "./Header";
 import Home from "./Home";
 import Checkout from "./Checkout";
 import Login from "./Login";
+import Payment from "./Payment";
 
 function App() {
-  
   return (
     <BrowserRouter>
       <div className="app">
@@ -30,6 +30,15 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/payment"
+            element={
+              <>
+                <Header />
+                <Payment />
+              </>
+            }
+          />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>

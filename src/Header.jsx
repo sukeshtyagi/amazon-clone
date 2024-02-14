@@ -25,7 +25,7 @@ function Header() {
         <div className="header__option">
           <NavLink to="/login">
             <div className="header__option__signIn">
-              {user.email ? (
+            {user && user.email ? (
                 <>
                   <span className="header__optionLineOne">
                     Hello {user.email}

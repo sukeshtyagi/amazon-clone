@@ -17,10 +17,9 @@ function Payment() {
   const elements = useElements();
 
   const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(true);
   const [processing, setProcessing] = useState("");
   const [succeeded, setSucceeded] = useState(false);
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     const getClientSecret = async () => {
@@ -31,13 +30,15 @@ function Payment() {
       setClientSecret(response.data.clientSecret);
     };
 
-    getClientSecret();
+    /*getClientSecret();*/
   }, [basket]);
 
   console.log("the secret is", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    /* 
     setProcessing(true);
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
@@ -49,15 +50,25 @@ function Payment() {
         setSucceeded(true);
         setError(null);
         setProcessing(false);
-        dispatch({
-          type: "EMPTY_BASKET",
-        });
-        navigate("/orders");
       });
+    dispatch({
+      type: "EMPTY_BASKET",
+    });
+    navigate("/orders");
+    */
+    setProcessing(true);
+
+    setTimeout(() => {
+      setSucceeded(true);
+      setProcessing(false);
+      dispatch({
+        type: "EMPTY_BASKET",
+      });
+      navigate("/orders");
+    }, 3000);
   };
 
   const handleChange = (event) => {
-    setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
 
@@ -84,6 +95,7 @@ function Payment() {
           <div className="payment__items">
             {basket.map((item) => (
               <CheckoutProduct
+                key={item.id}
                 id={item.id}
                 image={item.image}
                 title={item.title}
@@ -109,7 +121,7 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button disabled={disabled || processing || succeeded}>
+                <button disabled={processing || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>

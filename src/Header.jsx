@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -6,8 +6,21 @@ import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 
 function Header() {
-  const [{ basket, user }] = useStateValue();
-  console.log("Header re-rendered with user:", user.email);
+  const [{ basket, user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    console.log(userEmail);
+    if (userEmail) {
+      dispatch({
+        type: "SIGN_IN",
+        user: {
+          email: userEmail,
+        },
+      });
+    }
+  }, [dispatch]);
+
   return (
     <div className="header">
       <NavLink to="/">
@@ -23,16 +36,22 @@ function Header() {
       </div>
       <div className="header__nav">
         <div className="header__option">
-          <NavLink to="/login">
+          <NavLink to="/logout">
             <div className="header__option__signIn">
-            {user && user.email ? (
+              {user.email && (
                 <>
                   <span className="header__optionLineOne">
                     Hello {user.email}
                   </span>
                   <span className="header__optionLineTwo">Sign Out</span>
                 </>
-              ) : (
+              )}
+            </div>
+          </NavLink>
+
+          <NavLink to="/login">
+            <div className="header__option__signOut">
+              {!user.email && (
                 <>
                   <span className="header__optionLineOne">Hello Guest</span>
                   <span className="header__optionLineTwo">Sign IN</span>

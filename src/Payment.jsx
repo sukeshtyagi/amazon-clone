@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Payment.css";
 import CheckoutProduct from "./CheckoutProduct";
 import { useStateValue } from "./StateProvider";
@@ -6,10 +6,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
-import axios from "axios";
 
 function Payment() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
+  const [address, setAddress] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,43 +19,10 @@ function Payment() {
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
   const [succeeded, setSucceeded] = useState(false);
-  const [clientSecret, setClientSecret] = useState("");
-
-  useEffect(() => {
-    const getClientSecret = async () => {
-      const response = await axios({
-        method: "POST",
-        url: `/payment/create?total=${getBasketTotal(basket) * 100}`,
-      });
-      setClientSecret(response.data.clientSecret);
-    };
-
-    /*getClientSecret();*/
-  }, [basket]);
-
-  console.log("the secret is", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    /* 
-    setProcessing(true);
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-      .then(({ paymentIntent }) => {
-        setSucceeded(true);
-        setError(null);
-        setProcessing(false);
-      });
-    dispatch({
-      type: "EMPTY_BASKET",
-    });
-    navigate("/orders");
-    */
     setProcessing(true);
 
     setTimeout(() => {
@@ -80,12 +47,21 @@ function Payment() {
         </h1>
         <div className="payment__section">
           <div className="payment__tittle">
+            <h3>Name</h3>
             <h3>Delivery Address</h3>
           </div>
           <div className="payment__address">
-            <p>Guest Name</p>
-            <p>Address</p>
-            <p>Pincode</p>
+            <p>Name</p>
+            <p>{user.email}</p>
+
+            <input
+              type="text"
+              placeholder="Enter Address"
+              value={address}
+              onChange={(e) => {
+                setAddress(e.target.value);
+              }}
+            />
           </div>
         </div>
         <div className="payment__section">

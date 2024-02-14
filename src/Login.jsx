@@ -45,6 +45,7 @@ function Login() {
 
       if (foundUser) {
         userSignedIN();
+        localStorage.setItem('userEmail', inputData.email);
         navigate("/");
       } else {
         setErrorMessage("Invalid email or password.");
@@ -69,6 +70,7 @@ function Login() {
       let data = await response.json();
       if (data !== null || data !== undefined) {
         userSignedIN();
+        localStorage.setItem('userEmail', inputData.email);
         navigate("/");
       }
     } catch (error) {
@@ -79,7 +81,7 @@ function Login() {
 
   return (
     <div className="login">
-      <NavLink to="/" >
+      <NavLink to="/">
         <img
           src="https://pngimg.com/uploads/amazon/amazon_PNG24.png"
           className="login__logo"

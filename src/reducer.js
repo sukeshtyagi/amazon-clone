@@ -46,6 +46,12 @@ const reducer = (state, action) => {
         user: action.user,
       };
 
+    case "SIGN_OUT":
+      console.log("Signing out user:", action.user);
+      return {
+        user: action.user,
+      };
+
     default:
       return state;
   }

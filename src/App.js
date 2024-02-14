@@ -8,6 +8,8 @@ import Payment from "./Payment";
 import Orders from "./Orders";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Protected from "./Protected";
+import Signout from "./Signout";
 
 const promise = loadStripe(
   "pk_test_51OjCk5SJjrgblpJJEFx58wwFoukkwGC4sKB2zCCCDZHF7WwIgzE5QkTVKSVbkNEycQYkuISERAA7qVnCpCAuNy7W00YnjbYLm4"
@@ -52,11 +54,12 @@ function App() {
               <>
                 <Header />
                 <Elements stripe={promise}>
-                  <Payment />
+                  <Protected cmp={Payment} />
                 </Elements>
               </>
             }
           />
+          <Route path="/logout" element={<Signout />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </div>

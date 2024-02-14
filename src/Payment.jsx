@@ -61,10 +61,10 @@ function Payment() {
     setTimeout(() => {
       setSucceeded(true);
       setProcessing(false);
+      navigate("/orders", { state: { basket: basket } });
       dispatch({
         type: "EMPTY_BASKET",
       });
-      navigate("/orders");
     }, 3000);
   };
 

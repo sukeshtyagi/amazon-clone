@@ -9,7 +9,7 @@ function Product({ id, title, image, price, rating }) {
       type: "ADD_TO_BASKET",
       item: {
         id: id,
-        image:image,
+        image: image,
         title: title,
         price: price,
         rating: rating,
@@ -30,7 +30,7 @@ function Product({ id, title, image, price, rating }) {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p key={i}>*</p>
+              <span class="star">&#9733;</span>
             ))}
         </div>
       </div>

@@ -9,8 +9,9 @@ import { getBasketTotal } from "./reducer";
 import axios from "axios";
 
 function Payment() {
+  const [{ basket }, dispatch] = useStateValue();
+
   const navigate = useNavigate();
-  const [{ basket }] = useStateValue();
 
   const stripe = useStripe();
   const elements = useElements();

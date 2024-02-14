@@ -26,8 +26,11 @@
 }
 .product__rating {
   margin-top: 0px;
-  font-size: 30px;
+  font-size: 18px;
   display: flex;
+}
+.product__rating > span {
+  color: rgb(199, 80, 11);
 }
 .product > img {
   max-height: 200px;

@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
 
 function Login() {
+  const [{ user }, dispatch] = useStateValue();
+  const userSignedIN = () => {
+    console.log("userSignedIn executed");
+    dispatch({
+      type: "SIGN_IN",
+      user: {
+        email: inputData.email,
+      },
+    });
+  };
+
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -19,21 +33,22 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputData);
     const url = "http://localhost:3001/users";
     try {
       let response = await fetch(url);
       let data = await response.json();
-      console.log(data);
 
-      data.map((item) => {
-        if (
-          item.email === inputData.email &&
-          item.password === inputData.password
-        ) {
-          navigate("/");
-        }
-      });
+      const foundUser = data.find(
+        (item) =>
+          item.email === inputData.email && item.password === inputData.password
+      );
+
+      if (foundUser) {
+        userSignedIN();
+        navigate("/");
+      } else {
+        setErrorMessage("Invalid email or password.");
+      }
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
@@ -53,16 +68,18 @@ function Login() {
       let response = await fetch(url, payload);
       let data = await response.json();
       if (data !== null || data !== undefined) {
+        userSignedIN();
         navigate("/");
       }
     } catch (error) {
       console.log("Error uploading user data:", error);
+      setErrorMessage("Registration failed. Please try again.");
     }
   };
 
   return (
     <div className="login">
-      <NavLink to="/">
+      <NavLink to="/" >
         <img
           src="https://pngimg.com/uploads/amazon/amazon_PNG24.png"
           className="login__logo"
@@ -102,6 +119,7 @@ function Login() {
         <button className="login__registerButton" onClick={handleRegister}>
           Create your Amazon Account
         </button>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </div>
     </div>
   );

@@ -6,13 +6,13 @@ import { NavLink } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 
 function Header() {
-  const [{ basket }, reducer] = useStateValue();
-
+  const [{ basket, user }] = useStateValue();
+  console.log("Header re-rendered with user:", user.email);
   return (
     <div className="header">
       <NavLink to="/">
         <img
-          src="https://companieslogo.com/img/orig/AMZN_BIG-accd00da.png?t=1632523695"
+          src="https://i.pinimg.com/originals/47/b7/bd/47b7bdac4285ee24654ca7d68cf06351.png"
           alt="logo"
           className="header__logo"
         />
@@ -22,30 +22,44 @@ function Header() {
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <NavLink to="/login">
-          <div className="header__option">
-            <span className="header__optionLineOne">Hello Guest</span>
-            <span className="header__optionLineTwo">Sign IN</span>
-          </div>
-        </NavLink>
-
         <div className="header__option">
-          <span className="header__optionLineOne">Returns</span>
-          <span className="header__optionLineTwo">& Orders</span>
+          <NavLink to="/login">
+            <div className="header__option__signIn">
+              {user.email ? (
+                <>
+                  <span className="header__optionLineOne">
+                    Hello {user.email}
+                  </span>
+                  <span className="header__optionLineTwo">Sign Out</span>
+                </>
+              ) : (
+                <>
+                  <span className="header__optionLineOne">Hello Guest</span>
+                  <span className="header__optionLineTwo">Sign IN</span>
+                </>
+              )}
+            </div>
+          </NavLink>
         </div>
 
+        <NavLink to="/orders">
+          <div className="header__option">
+            <span className="header__optionLineOne">Returns</span>
+            <span className="header__optionLineTwo">& Orders</span>
+          </div>
+        </NavLink>
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
           <span className="header__optionLineTwo">Prime</span>
         </div>
-        <div className="header__shoppingBasket">
-          <NavLink to="/checkout" className="header__shoppingBasketIcon">
+        <NavLink to="/checkout" className="header__shoppingBasketIcon">
+          <div className="header__shoppingBasket">
             <ShoppingBasketIcon />
-          </NavLink>
-          <span className="header__optionLineTwo header__basketCount">
-            {basket?.length || 0}
-          </span>
-        </div>
+            <span className="header__optionLineTwo header__basketCount">
+              {basket?.length || 0}
+            </span>
+          </div>
+        </NavLink>
       </div>
     </div>
   );

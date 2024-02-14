@@ -9,6 +9,7 @@
   margin: 20px auto;
   object-fit: contain;
   width: 100px;
+  pointer-events: none;
 }
 .login__container {
   width: 300px;
@@ -19,6 +20,8 @@
   border: 2px solid lightgray;
   border-radius: 5px;
   padding: 30px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
 }
 .login__container > p {
   text-align: justify;
@@ -63,4 +66,10 @@
   font-size: 18px;
   background: lightgrey;
   border-color: darkgrey;
+}
+.error-message {
+  color: red;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 0px;
 }

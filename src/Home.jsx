@@ -7,7 +7,7 @@ function Home() {
     <div className="home">
       <div className="home__container">
         <img
-          src="https://s.hdnux.com/photos/01/22/16/43/21555441/4/rawImage.jpg"
+          src="https://m.media-amazon.com/images/G/01/primevideo/seo/primevideo-seo-logo.png"
           alt=""
           className="home__image"
         />
@@ -54,7 +54,7 @@ function Home() {
           <Product
             id="TSMM2021"
             title="The Science of Mind Management"
-            image="https://m.media-amazon.com/images/I/41rY50pAxKL._SY445_SX342_.jpg"
+            image="https://i.pinimg.com/736x/ef/8d/ac/ef8dac1cb13d9d420c328f767ac37465.jpg"
             price={30.11}
             rating={5}
           />

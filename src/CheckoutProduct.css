@@ -16,6 +16,9 @@
 .checkoutProduct__rating {
   display: flex;
 }
+.checkoutProduct__rating > span {
+  color: rgb(199, 80, 11);
+}
 .checkoutProduct__info {
   padding-top: 10px;
   display: flex;

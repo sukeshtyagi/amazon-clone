@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Orders.css";
 import { useLocation } from "react-router-dom";
 import CheckoutProduct from "./CheckoutProduct";
@@ -6,10 +6,7 @@ import CheckoutProduct from "./CheckoutProduct";
 function Orders() {
   const { basket } = useLocation().state;
   console.log(basket);
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
+
   const timestamp = new Date().toLocaleString();
   return (
     <div className="orders">

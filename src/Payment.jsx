@@ -65,7 +65,7 @@ function Payment() {
       dispatch({
         type: "EMPTY_BASKET",
       });
-    }, 3000);
+    }, 1000);
   };
 
   const handleChange = (event) => {
